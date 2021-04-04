@@ -1,50 +1,40 @@
-import telebot
+import telegram
+from telegram import Update, ForceReply
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 import requests
-import datetime
-from threading import Thread
-import time
-
-bot = telebot.TeleBot('1643056128:AAHIS74BGDDf7ldzj5DQLCFC1ZQv4JOvVEE')
-fact_request = requests.get('https://cat-fact.herokuapp.com/facts/random')
-userlist =[]
 
 
-@bot.message_handler(commands=['start', 'help'])
-def send_welcome(message):
-    bot.reply_to(message, "Howdy, how are you doing?")
+# from Core import Core_file
 
 
-@bot.message_handler(commands=['commands'])
-def send_welcome(message):
-    bot.reply_to(message, "Вы можете использовать следующие "
-                          "команды:{"
-                          "/start - Инициализация"
-                          "/commands - Вывести список доступных команд]"
-                          "/fact - получить интересный факт"
-                          "бот понимает следующие слова и предложения:"
-                          "привет, пока, как дела?, как тебя зовут?")
+def send_welcome(update: Update, _: CallbackContext) -> None:
+    update.message.reply_text("Howdy, how are you doing?")
 
 
-@bot.message_handler(commands=['fact'])
-def get_fact(message):
-    bot.reply_to(message, (fact_request.json()['text']))
+def get_commands(update: Update, _: CallbackContext) -> None:
+    update.message.reply_text("Вы можете использовать следующие "
+                              "команды:{"
+                              "/start - Инициализация"
+                              "/commands - Вывести список доступных команд]"
+                              "/fact - получить интересный факт"
+                              "бот понимает следующие слова и предложения:"
+                              "привет, пока, как дела?, как тебя зовут?")
 
 
-@bot.message_handler(content_types=['text'])
-def get_send_message(message):
-    if message.text.lower() == 'привет':
-        bot.send_message(message.from_user.id, 'Привет!')
-    if message.text.lower() == 'пока':
-        bot.send_message(message.from_user.id, 'Пока')
-    if message.text.lower() == 'как дела?':
-        bot.send_message(message.from_user.id, 'Хорошо, спасибо!')
-    if message.text.lower() == 'как тебя зовут?':
-        bot.send_message(message.from_user.id, 'Бот. Джеймс Бот.')
+def get_fact(update: Update, _: CallbackContext) -> None:
+    fact_request = requests.get('https://cat-fact.herokuapp.com/facts/random')
+    update.message.reply_text((fact_request.json()['text']))
+
+
+def get_send_message(update: Update, _: CallbackContext) -> None:
+    if update.message.text.lower() == 'привет':
+        update.message.reply_text('Привет!')
+    elif update.message.text.lower() == 'пока':
+        update.message.reply_text('Пока')
+    elif update.message.text.lower() == 'как дела?':
+        update.message.reply_text('Хорошо, спасибо!')
+    elif update.message.text.lower() == 'как тебя зовут?':
+        update.message.reply_text('ББот.')
     else:
-        bot.send_message(message.from_user.id, 'Прости, я тебя не понимаю.. '
-                                               'Воспользуйся списком доступных команд / commands')
-
-
-
-
-bot.polling()
+        update.message.reply_text('Прости, я тебя не понимаю.. '
+                                  'Воспользуйся списком доступных команд / commands')
