@@ -3,16 +3,12 @@ from telegram import Update, ForceReply
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 import requests
 import datetime
-from threading import Thread
-import time
-
-userlist = []
 
 
-# repeatable_func = Repeated_func(send_notifications)
-# repeatable_func.run()
 def send_notifications(ctx: CallbackContext) -> None:
-    """Send the alarm message."""
+    """This function creating example of class
+    which request information from repository.
+    I used repository with some facts about cats for example"""
     job = ctx.job
     send_fact = Fact()
     send_text = send_fact.some_fact
@@ -23,13 +19,17 @@ def send_notifications(ctx: CallbackContext) -> None:
 
 
 def enable(u: Update, ctx: CallbackContext) -> None:
-    """Add a job to the queue."""
+    """Add a job to the queue. In this bot this function
+    enabling notifications"""
     chat_id = u.message.chat_id
     remove_job_if_exists(str(chat_id), ctx)
     ctx.job_queue.run_repeating(send_notifications, 5, context=chat_id, name=str(chat_id))
 
 
+
 def disable(u: Update, ctx: CallbackContext) -> None:
+    """ Remove job from queue. In this bot this function
+    disabling notifications"""
     chat_id = u.message.chat_id
     remove_job_if_exists(str(chat_id), ctx)
 
@@ -44,16 +44,29 @@ def remove_job_if_exists(name: str, context: CallbackContext) -> bool:
     return True
 
 class Fact:
+    """
+    This class created for requesting information from repository,
+    which https://cat-fact.herokuapp.com/facts/random by default
+    """
 
     def __init__(self, url='https://cat-fact.herokuapp.com/facts/random'):
         self.url = url
 
     @property
     def some_fact(self):
+        """
+        Fuction making request and return JSON-format file with
+        some information which was requested from repository
+        :return: JSON-format file
+        """
         fact_request = requests.get(self.url)
         fact = fact_request.json()['text']
         return fact
 
+
+
+
+# my asshole was here
 # class Repeated_func:
 #
 #     def __init__(self, func):
