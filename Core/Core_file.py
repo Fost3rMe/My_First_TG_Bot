@@ -1,6 +1,5 @@
-import telegram
-from telegram import Update, ForceReply
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
+from telegram import Update
+from telegram.ext import  CallbackContext
 import requests
 import datetime
 
@@ -26,7 +25,6 @@ def enable(u: Update, ctx: CallbackContext) -> None:
     ctx.job_queue.run_repeating(send_notifications, 5, context=chat_id, name=str(chat_id))
 
 
-
 def disable(u: Update, ctx: CallbackContext) -> None:
     """ Remove job from queue. In this bot this function
     disabling notifications"""
@@ -43,6 +41,7 @@ def remove_job_if_exists(name: str, context: CallbackContext) -> bool:
         job.schedule_removal()
     return True
 
+
 class Fact:
     """
     This class created for requesting information from repository,
@@ -55,7 +54,7 @@ class Fact:
     @property
     def some_fact(self):
         """
-        Fuction making request and return JSON-format file with
+        Function making request and return JSON-format file with
         some information which was requested from repository
         :return: JSON-format file
         """
@@ -66,7 +65,9 @@ class Fact:
 
 
 
-# my asshole was here
+# my asshole was burned here
+#
+#
 # class Repeated_func:
 #
 #     def __init__(self, func):
