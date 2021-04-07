@@ -1,12 +1,13 @@
 from Core import Core_file
 from Core import Bot
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from os import getenv
 
 
 def main() -> None:
     """Start the bot."""
     # Create the Updater and pass it your bot's token.
-    updater = Updater("1643056128:AAHIS74BGDDf7ldzj5DQLCFC1ZQv4JOvVEE")
+    updater = Updater(getenv("TOKEN"))
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
     # on different commands - answer in Telegram

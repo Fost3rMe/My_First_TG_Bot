@@ -1,5 +1,5 @@
 from telegram import Update
-from telegram.ext import  CallbackContext
+from telegram.ext import CallbackContext
 import requests
 import datetime
 
@@ -22,7 +22,7 @@ def enable(u: Update, ctx: CallbackContext) -> None:
     enabling notifications"""
     chat_id = u.message.chat_id
     remove_job_if_exists(str(chat_id), ctx)
-    ctx.job_queue.run_repeating(send_notifications, 5, context=chat_id, name=str(chat_id))
+    ctx.job_queue.run_repeating(send_notifications, 30, context=chat_id, name=str(chat_id))
 
 
 def disable(u: Update, ctx: CallbackContext) -> None:
