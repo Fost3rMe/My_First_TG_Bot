@@ -1,9 +1,13 @@
-from telegram import Update
+from telegram import Update   # TODO: поместить в файл requirements.txt
 from telegram.ext import CallbackContext
-import requests
+import requests  # TODO: поместить в файл requirements.txt
 import datetime
 
 
+# TODO: Исправить определение функций! Аналогично файлу c Bot.py
+# TODO: Уведомления же могут быть не только в виде фактов!
+#  Можно сделать различный классы для разных уведомлений и
+#  поместить их в отдельную папку как пакет python
 def send_notifications(ctx: CallbackContext) -> None:
     """This function creating example of class
     which request information from repository.
@@ -42,6 +46,7 @@ def remove_job_if_exists(name: str, context: CallbackContext) -> bool:
     return True
 
 
+# TODO: Классы оформляют в отдельных модулях. Нужно перенести!
 class Fact:
     """
     This class created for requesting information from repository,
@@ -61,27 +66,3 @@ class Fact:
         fact_request = requests.get(self.url)
         fact = fact_request.json()['text']
         return fact
-
-
-
-
-# my asshole was burned here
-#
-#
-# class Repeated_func:
-#
-#     def __init__(self, func):
-#         self.func = func
-#         self.isCancel = False
-#
-#     def _run(self):
-#         while not self.isCancel:
-#             self.func()
-#
-#     def run(self):
-#         self.isCancel = False
-#         thread = Thread(target=Repeated_func._run, args={self})
-#         thread.start()
-#
-#     def stop(self):
-#         self.isCancel = True
