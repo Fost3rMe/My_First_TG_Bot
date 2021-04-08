@@ -1,8 +1,16 @@
-from telegram import Update
+from telegram import Update  # TODO: поместить в файл requirements.txt
 from telegram.ext import CallbackContext
-import requests
+import requests  # TODO: поместить в файл requirements.txt
 
 
+# TODO: Не хватает строк документации в определении функций
+# TODO: Исправить определение функций!
+# def send_welcome(update: Update, _: CallbackContext) -> None:
+# Откуда взял такой синтаксис? на Python так не принято писать
+# Вот пример с официальной документации
+# def unknown(update, context):
+#     context.bot.send_message(chat_id=update.effective_chat.id,
+#     text="Sorry, I didn't understand that command.")
 def send_welcome(update: Update, _: CallbackContext) -> None:
     """
     Function that sending welcome message

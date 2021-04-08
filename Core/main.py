@@ -1,9 +1,14 @@
 from Core import Core_file
 from Core import Bot
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+# TODO: поместить в файл requirements.txt
+from telegram.ext import (Updater,
+                          CommandHandler,
+                          MessageHandler,
+                          Filters)
 from os import getenv
 
 
+# TODO: Исправить определение функций!
 def main() -> None:
     """Start the bot."""
     # Create the Updater and pass it your bot's token.
