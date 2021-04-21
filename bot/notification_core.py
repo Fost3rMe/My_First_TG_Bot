@@ -65,23 +65,3 @@ class Fact:
 
 
 
-# my asshole was burned here
-#
-#
-# class Repeated_func:
-#
-#     def __init__(self, func):
-#         self.func = func
-#         self.isCancel = False
-#
-#     def _run(self):
-#         while not self.isCancel:
-#             self.func()
-#
-#     def run(self):
-#         self.isCancel = False
-#         thread = Thread(target=Repeated_func._run, args={self})
-#         thread.start()
-#
-#     def stop(self):
-#         self.isCancel = True
