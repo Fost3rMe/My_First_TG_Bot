@@ -1,5 +1,5 @@
-from os import getenv
-import requests
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from telegram import Update
-from telegram.ext import CallbackContext
+python-telegram-bot==13.4.1
+requests~=2.25.1
+tornado>=5.1
+APScheduler==3.6.3
+pytz>=2018.6

@@ -21,7 +21,7 @@ def main() -> None:
     dispatcher.add_handler(CommandHandler("disable", notification_core.disable))
     dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, bot_core.get_send_message))
 
-    # Start the Bot
+    # Starts the Bot
     updater.start_polling()
 
     # start_polling() is non-blocking and will stop the bot gracefully.
